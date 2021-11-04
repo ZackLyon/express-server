@@ -28,4 +28,12 @@ describe('Order Service tests', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('deletes an order and sends a text message', async () => {
+    await OrderService.createOrder(99);
+    const actual = await OrderService.delete(1);
+    const expected = { id: '1', quantity: 99 };
+
+    expect(actual).toEqual(expected);
+  });
 });
