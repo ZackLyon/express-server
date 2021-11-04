@@ -34,11 +34,24 @@ describe('routes tests', () => {
     return request(app)
       .get('/api/v1/orders/1')
       .then((res) => {
-        // expect(createMessage).toHaveBeenCalledTimes(1);
         expect(res.body).toEqual({
           id: '1',
           quantity: 99,
         });
+      });
+  });
+
+  it('gets all orders', async () => {
+    await Order.insert(99);
+    await Order.insert(55);
+
+    return request(app)
+      .get('/api/v1/orders')
+      .then((res) => {
+        expect(res.body).toEqual([
+          { id: '1', quantity: 99 },
+          { id: '2', quantity: 55 },
+        ]);
       });
   });
 });
