@@ -29,6 +29,15 @@ describe('models tests', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('gets an order by id in our database', async () => {
+    await Order.insert(99);
+
+    const actual = await Order.getById(1);
+    const expected = { id: '1', quantity: 99 };
+
+    expect(actual).toEqual(expected);
+  });
+
   it('updates an order in our database', async () => {
     await Order.insert(99);
     await Order.update(1, 77);
