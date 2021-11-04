@@ -28,4 +28,14 @@ describe('models tests', () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it('updates an order in our database', async () => {
+    await Order.insert(99);
+    await Order.update(1, 77);
+
+    const actual = await Order.getAll();
+    const expected = [{ id: '1', quantity: 77 }];
+
+    expect(actual).toEqual(expected);
+  });
 });
