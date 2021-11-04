@@ -54,4 +54,19 @@ describe('routes tests', () => {
         ]);
       });
   });
+
+  it('updates an order in our database and sends a text message', async () => {
+    await Order.insert(99);
+
+    return request(app)
+      .patch('/api/v1/orders/1')
+      .send({ quantity: 77 })
+      .then((res) => {
+        // expect(createMessage).toHaveBeenCalledTimes(1);
+        expect(res.body).toEqual({
+          id: '1',
+          quantity: 77,
+        });
+      });
+  });
 });
